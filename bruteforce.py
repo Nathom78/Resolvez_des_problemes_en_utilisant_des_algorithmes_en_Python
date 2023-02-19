@@ -46,10 +46,12 @@ def combinations(iterable, r):
         yield tuple(pool[i] for i in indices)
 
 
-def algorithme(array_data):
+def algorithme():
     """
     :return:
     """
+    dataframe = read_file()
+    array_data = dataframe["stock"].to_numpy()
 
     combinations_result = []
 
@@ -111,7 +113,7 @@ def best_profit(filtered_list):
 
 def main():
     dataframe = read_file()
-    stock_data = dataframe["stock"].to_numpy()
+    # stock_data = dataframe["stock"].to_numpy()
 
     dataframe["profit_amount"] = dataframe["price"] * dataframe["profit"]
     dataframe["profit_amount"].round(decimals=2)
@@ -120,7 +122,7 @@ def main():
     test3 = timeit.Timer(algorithme)
     print(test3.timeit(10))
 
-    combinations_possible = algorithme(stock_data)
+    combinations_possible = algorithme()
     result = put_price(combinations_possible, dataframe)
     list_filtered = filter_for_max(result)
     best_combination = best_profit(list_filtered)
@@ -136,4 +138,6 @@ def main():
 
 
 if __name__ == '__main__':
+    test4 = timeit.Timer(main)
+    print(test4.timeit(10))
     main()
