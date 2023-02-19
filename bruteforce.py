@@ -1,5 +1,6 @@
 import pandas as pd
-import timeit  # pour calcul du temps execution
+# import timeit  # pour calcul du temps execution
+from datetime import datetime
 
 MAX_EXPENDITURE = 500
 
@@ -80,13 +81,11 @@ def filter_for_max(list_result):
 
     def less_than(actions):
         add_price = 0
-
         if len(actions) > 1:
             for action in actions:
                 add_price += action[1]
         else:
             add_price = actions[0][1]
-
         return add_price < MAX_EXPENDITURE
 
     for tuple_actions in list_result:
@@ -119,14 +118,18 @@ def main():
     dataframe["profit_amount"].round(decimals=2)
 
     # pour calcul du temps de l'algorithme
-    test3 = timeit.Timer(algorithme)
-    print(test3.timeit(10))
+    # test3 = timeit.Timer(algorithme)
+    # print(test3.timeit(10))
 
     combinations_possible = algorithme()
+    print("combinaisons, faites", str(datetime.now()))
     result = put_price(combinations_possible, dataframe)
+    print("put price ok", str(datetime.now()))
     list_filtered = filter_for_max(result)
+    print("portefeuilles trop chers écartés", str(datetime.now()))
     best_combination = best_profit(list_filtered)
-
+    print("trie pour le meilleur, ok", str(datetime.now()))
+    # Rajout à la meilleure combinaison d'une ligne pour le total
     pd_best_combination = pd.DataFrame(best_combination, columns=["stock", "price", "profit", "profit_amount"])
     row_total = {"stock": ["total"], "price": [pd_best_combination["price"].sum()],
                  "profit_amount": [pd_best_combination["profit_amount"].sum()]}
@@ -138,6 +141,6 @@ def main():
 
 
 if __name__ == '__main__':
-    test4 = timeit.Timer(main)
-    print(test4.timeit(10))
+    # test4 = timeit.Timer(main)
+    # print(test4.timeit(10))
     main()
