@@ -20,10 +20,10 @@ def read_file():
 
 def combinations(iterable, r):
     """
-    Return r length subsequences, of elements from the input iterable.
+    'R' length subsequences, of elements from the input iterable.
     :param iterable:
     :param r:
-    :return:
+    :return: tuple()
     """
     # combinations('ABCD', 2) --> AB AC AD BC BD CD
     # combinations(range(4), 3) --> 012 013 023 123
@@ -47,13 +47,12 @@ def combinations(iterable, r):
 
 def algorithme():
     """
-    :return:
+    :return: list(tuple(numpy.ndarray))
     """
     dataframe = read_file()
     dataframe["profit_amount"] = dataframe["price"] * dataframe["profit"]
     dataframe["profit_amount"].round(decimals=2)
     array_data = dataframe.to_numpy()
-
     combinations_result = []
 
     for n in range(1, len(array_data) + 1):
