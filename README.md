@@ -8,23 +8,9 @@ Projet 7 du parcours OpenClassrooms Développeur d'application - Python
 # INSTALLATION ( pour windows )
 
 Créer un dossier vide. Il contiendra le code complet du projet
-## 1. Installation du site
-
-Ouvrez un terminal:
-
-Depuis le dossier précédemment créé, clonez le repository du programme avec la commande :
-
-<pre><code>git clone https://github.com/Nathom78/JustStreamIt.git</code></pre>
-
-Ou utiliser [ce repository](https://github.com/Nathom78/JustStreamIt.git) en téléchargeant le zip.
-<br>
 
 
-## 2. Installer l'API
-Vous devez cloner le repository de l'API [ce repository](https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR.git)
-Ensuite suivre les notes depuis le repository, pour decomptacter la base de données et lancer le serveur de l'API.
-
-## 3. Installer les paquets nécessaires aux projets ( Juste pour apporter des améliorations)
+## 1. Installer les paquets nécessaires aux projets ( Juste pour apporter des améliorations)
 
 <br>
 Taper la commande suivante : 

@@ -3,6 +3,7 @@ import pandas as pd
 from datetime import datetime
 
 MAX_EXPENDITURE = 500
+FILEPATH = "data/Partie1_virgules - Copie.csv"
 
 
 def read_file():
@@ -11,9 +12,9 @@ def read_file():
     :return: Dataframe du premier fichier
     """
     def pourcent(x):
-        return int(x.replace("%", "")) / 100
+        return float(x.replace("%", "")) / 100
 
-    part_one = pd.read_csv("data/Partie1_virgules - Copie.csv", names=["stock", "price", "profit"], header=0,
+    part_one = pd.read_csv(FILEPATH, names=["stock", "price", "profit"], header=0,
                            converters={"profit": pourcent})
     return part_one
 
@@ -60,21 +61,6 @@ def algorithme():
     return combinations_result
 
 
-def put_price(array_result, dataframe):
-    price_array = []
-
-    def replace(string_actions):
-        for row in range(len(dataframe)):
-            if str(string_actions) == str(dataframe.loc[row, "stock"]):
-                return dataframe.loc[row].to_numpy()
-
-    for tuple_actions in array_result:
-        combination_array = tuple(map(replace, tuple_actions))
-        price_array += (combination_array,)
-
-    return price_array
-
-
 def filter_for_max(list_result):
     list_filtered = []
 
@@ -110,12 +96,6 @@ def best_profit(filtered_list):
 
 
 def main():
-    # dataframe = read_file()
-    # stock_data = dataframe["stock"].to_numpy()
-
-    # dataframe["profit_amount"] = dataframe["price"] * dataframe["profit"]
-    # dataframe["profit_amount"].round(decimals=2)
-
     # pour calcul du temps de l'algorithme
     # test3 = timeit.Timer(algorithme)
     # print(test3.timeit(10))
@@ -123,8 +103,6 @@ def main():
     print("Heure de début", str(debut))
     combinations_possible = algorithme()
     print("combinaisons, faites", str(datetime.now()))
-    # result = put_price(combinations_possible, dataframe)
-    # print("put price ok", str(datetime.now()))
     list_filtered = filter_for_max(combinations_possible)
     print("portefeuilles trop chers écartés", str(datetime.now()))
     best_combination = best_profit(list_filtered)
@@ -137,7 +115,7 @@ def main():
     sum_profit = [pd_best_combination, df_row_total]
     total = pd.concat(sum_profit)
 
-    print("best_combination\n", total)
+    print("best combination :\n", total)
     fin = datetime.now()
     print("Heure de fin", str(fin))
     print("Fait en", str(fin-debut))
